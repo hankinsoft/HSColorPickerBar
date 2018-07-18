@@ -28,6 +28,8 @@ FOUNDATION_EXPORT const unsigned char HSColorPickerBarVersionString[];
 IB_DESIGNABLE
 @interface HSColorPickerBar : NSView
 
+- (NSColor*) selectedColor;
+
 @property(nonatomic,assign) IBInspectable CGFloat padding;
 
 @property(nonatomic,retain) IBInspectable NSColor* color1;

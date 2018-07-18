@@ -89,6 +89,19 @@
     [colorPickers addObject: colorPicker];
 }
 
+- (NSColor*) selectedColor
+{
+    for(HSColorPicker * colorPicker in colorPickers)
+    {
+        if(colorPicker.isSelected)
+        {
+            return colorPicker.backgroundColor;
+        }
+    }
+    
+    return nil;
+} // End of selectedColor
+
 #pragma mark - HSColorPickerDelegate
 
 - (void) colorPickerWasClicked: (HSColorPicker*) sender
