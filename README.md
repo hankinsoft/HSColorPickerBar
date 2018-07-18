@@ -1,5 +1,5 @@
 # HSColorPickerBar
-Color picker used by Hankinsoft Development, in SQLPro products.
+Color picker used by Hankinsoft Development in SQLPro products.
 
 ![Preview](https://raw.githubusercontent.com/hankinsoft/HSColorPickerBar/master/example.png)
 
