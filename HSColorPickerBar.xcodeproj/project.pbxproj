@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7293CF4020FF66220058D83E /* HSColorPickerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7293CF3C20FF66220058D83E /* HSColorPickerBar.m */; };
-		7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7293CF3D20FF66220058D83E /* HSColorPicker.h */; };
+		7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7293CF3D20FF66220058D83E /* HSColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7293CF4220FF66220058D83E /* HSColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7293CF3E20FF66220058D83E /* HSColorPicker.m */; };
-		7293CF4420FF667C0058D83E /* HSColorPickerBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 7293CF4320FF667C0058D83E /* HSColorPickerBar.h */; };
+		7293CF4420FF667C0058D83E /* HSColorPickerBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 7293CF4320FF667C0058D83E /* HSColorPickerBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +68,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */,
 				7293CF4420FF667C0058D83E /* HSColorPickerBar.h in Headers */,
+				7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
