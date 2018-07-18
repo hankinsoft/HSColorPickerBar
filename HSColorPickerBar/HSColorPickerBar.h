@@ -20,6 +20,7 @@ FOUNDATION_EXPORT const unsigned char HSColorPickerBarVersionString[];
 
 @protocol HSColorPickerBarDelegate <NSObject>
 
+@optional
 - (void) colorPickerBar: (HSColorPickerBar*) colorPickerBar
    selectedColorChanged: (NSColor*) color;
 
@@ -29,6 +30,9 @@ IB_DESIGNABLE
 @interface HSColorPickerBar : NSView
 
 - (NSColor*) selectedColor;
+- (void) setSelectedColor: (NSColor*) selectedColor;
+- (void) setSelectedColor: (NSColor*) selectedColor
+            withTolerance: (CGFloat) tolerance;
 
 @property(nonatomic,assign) IBInspectable CGFloat padding;
 

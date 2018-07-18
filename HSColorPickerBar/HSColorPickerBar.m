@@ -102,6 +102,57 @@
     return nil;
 } // End of selectedColor
 
+- (void) setSelectedColor: (NSColor*) selectedColor
+{
+    [self setSelectedColor: selectedColor
+             withTolerance: 0.0f];
+}
+
+- (void) setSelectedColor: (NSColor*) selectedColor
+            withTolerance: (CGFloat) tolerance
+{
+    // Default, clear selection.
+    for(HSColorPicker * colorPicker in colorPickers)
+    {
+        colorPicker.isSelected = false;
+    }
+
+    // Clearing selection, no need to do anything else.
+    if(nil == selectedColor)
+    {
+        return;
+    } // End of no selected color
+
+    for(HSColorPicker * colorPicker in colorPickers)
+    {
+        // Use a tolerance for
+        BOOL isEqual = [self color: selectedColor
+                    isEqualToColor: colorPicker.backgroundColor
+                     withTolerance: tolerance];
+
+        if(isEqual)
+        {
+            colorPicker.isSelected = true;
+            break;
+        }
+    }
+}
+
+// From: https://stackoverflow.com/a/21622229/127853
+- (BOOL) color: (NSColor *) color1
+isEqualToColor: (NSColor *) color2
+ withTolerance: (CGFloat) tolerance
+{
+    CGFloat r1, g1, b1, a1, r2, g2, b2, a2;
+    [color1 getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
+    [color2 getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
+    return
+    fabs(r1 - r2) <= tolerance &&
+    fabs(g1 - g2) <= tolerance &&
+    fabs(b1 - b2) <= tolerance &&
+    fabs(a1 - a2) <= tolerance;
+}
+
 #pragma mark - HSColorPickerDelegate
 
 - (void) colorPickerWasClicked: (HSColorPicker*) sender
