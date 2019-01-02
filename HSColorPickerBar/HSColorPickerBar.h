@@ -15,6 +15,7 @@ FOUNDATION_EXPORT double HSColorPickerBarVersionNumber;
 FOUNDATION_EXPORT const unsigned char HSColorPickerBarVersionString[];
 
 #import <Cocoa/Cocoa.h>
+#import "HSColorPicker.h"
 
 @class HSColorPickerBar;
 
