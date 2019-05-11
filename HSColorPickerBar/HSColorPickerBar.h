@@ -48,6 +48,8 @@ IB_DESIGNABLE
 @property(nonatomic,retain) IBInspectable NSColor* color9;
 @property(nonatomic,retain) IBInspectable NSColor* color10;
 
+@property(nonatomic) IBInspectable BOOL allowsCustomColorSelection;
+
 @property(nonatomic,weak) IBInspectable id<HSColorPickerBarDelegate> delegate;
 
 @end

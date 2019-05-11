@@ -8,10 +8,13 @@
 
 #import "HSColorPickerBar.h"
 #import "HSColorPicker.h"
+#import "HSCustomColorPicker.h"
 
 @interface HSColorPickerBar()<HSColorPickerDelegate>
 {
     NSMutableArray<HSColorPicker*>* colorPickers;
+  
+    HSColorPicker *customColorPicker; // This ivar is used to toggle the custom color picker on and off
 }
 @end
 
@@ -57,7 +60,13 @@
     [self initializeColorBarWithColor: self.color8];
     [self initializeColorBarWithColor: self.color9];
     [self initializeColorBarWithColor: self.color10];
-    
+  
+    [self initializeCustomColorBar]; // We add the custom color bar always, but show it or hide it based on the allowsCustomColorSelection property.
+  
+    // Forcefully calling the property setter to update initial state set in Interface Builder
+    [self setAllowsCustomColorSelection:self.allowsCustomColorSelection];
+  
+  
     [self setNeedsLayout: YES];
     [self setNeedsDisplay: YES];
 }
@@ -87,6 +96,35 @@
 
     // Add our color picker
     [colorPickers addObject: colorPicker];
+}
+
+- (void) initializeCustomColorBar
+{
+  /*if(nil == color)
+  {
+    return;
+  } // End of no image ie not picked in interface*/
+  
+  HSCustomColorPicker * colorPicker = [[HSCustomColorPicker alloc] init];
+  colorPicker.delegate = self;
+  colorPicker.backgroundColor = nil; // By default we start with no selected color
+  
+  [self addSubview: colorPicker];
+  
+  CGFloat offset = 0;
+  offset = (colorPickers.count * self.bounds.size.height) + (self.padding * colorPickers.count);
+  
+  colorPicker.translatesAutoresizingMaskIntoConstraints = false;
+  [colorPicker.heightAnchor constraintEqualToConstant: self.bounds.size.height].active = true;
+  [colorPicker.widthAnchor constraintEqualToConstant: self.bounds.size.height].active = true;
+  [colorPicker.centerYAnchor constraintEqualToAnchor: self.centerYAnchor].active = true;
+  [colorPicker.leftAnchor constraintEqualToAnchor: self.leftAnchor
+                                         constant: offset].active = true;
+  
+  // Add our color picker
+  [colorPickers addObject: colorPicker];
+  
+  customColorPicker = colorPicker;
 }
 
 - (NSColor*) selectedColor
@@ -186,4 +224,25 @@ isEqualToColor: (NSColor *) color2
     } // End of colorPicker enumeration
 } // End of colorPicker selection changed
 
+- (void)customColorPickerUpdateColor: (HSColorPicker*) sender
+{
+  if(self.delegate && [self.delegate respondsToSelector: @selector(colorPickerBar:selectedColorChanged:)])
+  {
+    NSColor * selectedColor = sender.backgroundColor;
+    
+    if([sender isSelected]) {
+      [self.delegate colorPickerBar: self
+             selectedColorChanged: selectedColor];
+    }
+  } // End of we have a delegate and the selection changed
+}
+
+-(void) setAllowsCustomColorSelection:(BOOL)allows {
+  if(allows) {
+    [customColorPicker setHidden:NO];
+  } else {
+    [customColorPicker setHidden:YES];
+  }
+  _allowsCustomColorSelection = allows;
+}
 @end
