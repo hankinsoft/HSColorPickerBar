@@ -90,6 +90,12 @@
     if(self.delegate && [self.delegate respondsToSelector: @selector(colorPickerWasClicked:)])
     {
       [self.delegate colorPickerWasClicked: self];
+      
+      // Disabled de-selection of the custom color picker. Normal color pickers de-select when
+      // they are tapped again. For the custom color picker, I found I expected the color picker to
+      // appear and for the picker to remain selected. This sorts the issue. May need to a
+      // 'remove selection' button in the future.
+      self.isSelected = true;
     } // End of we respond to the selector
   } // End of single clicked
 } // End of mouseUp:
