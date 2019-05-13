@@ -161,6 +161,7 @@
         return;
     } // End of no selected color
 
+    BOOL didFind = false;
     for(HSColorPicker * colorPicker in colorPickers)
     {
         // Use a tolerance for
@@ -170,10 +171,17 @@
 
         if(isEqual)
         {
+            didFind = true;
             colorPicker.isSelected = true;
             break;
         }
     }
+
+    if(!didFind && self.allowsCustomColorSelection)
+    {
+        customColorPicker.backgroundColor = selectedColor;
+        customColorPicker.isSelected = true;
+    } // End of did not find an item and we have a custom picker
 }
 
 // From: https://stackoverflow.com/a/21622229/127853
