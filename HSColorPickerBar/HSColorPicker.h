@@ -10,14 +10,25 @@
 
 @class HSColorPicker;
 
+@interface NSColor (DarkLight)
+
+- (NSColor *) lighterColor;
+- (NSColor *) darkerColor;
+@end
+
+
 @protocol HSColorPickerDelegate <NSObject>
 
 - (void) colorPickerWasClicked: (HSColorPicker*) colorPicker;
+- (void) customColorPickerUpdateColor: (HSColorPicker*) colorPicker;
 
 @end
 
 IB_DESIGNABLE
-@interface HSColorPicker : NSView
+@interface HSColorPicker : NSView {
+@protected
+  BOOL            mouseOver;
+}
 
 @property(nonatomic,assign) BOOL isSelected;
 @property(nonatomic,retain) IBInspectable NSColor * backgroundColor;

@@ -13,26 +13,47 @@
 
 - (NSColor *) lighterColor
 {
-    CGFloat h, s, b, a;
-    
+  CGFloat h, s, b, a;
+  NSColor *outColor = nil;
+  
+  @try
+  {
+    // This call works only for component-based colors, but color panel allows us to pick non-sRGB based ones
     [self getHue:&h saturation:&s brightness:&b alpha:&a];
     
-    return [NSColor colorWithHue:h
-                      saturation:s
-                      brightness:MIN(b * 1.3, 1.0)
-                           alpha:a];
+    outColor = [NSColor colorWithHue:h
+                          saturation:s
+                          brightness:MIN(b * 1.3, 1.0)
+                               alpha:a];
+  }
+  @catch(NSException *colorException)
+  {
+    outColor = [NSColor lightGrayColor];
+  }
+  return outColor;
 }
 
 - (NSColor *) darkerColor
 {
-    CGFloat h, s, b, a;
-    
+  CGFloat h, s, b, a;
+  
+  NSColor *outColor = nil;
+  @try
+  {
     [self getHue:&h saturation:&s brightness:&b alpha:&a];
     
-    return [NSColor colorWithHue:h
-                      saturation:s
-                      brightness:b * 0.75
-                           alpha:a];
+    outColor = [NSColor colorWithHue:h
+                          saturation:s
+                          brightness:b * 0.75
+                               alpha:a];
+    
+  }
+  @catch (NSException *exception)
+  {
+    outColor = [NSColor darkGrayColor];
+  }
+  
+  return outColor;
 }
 
 @end
@@ -40,7 +61,6 @@
 @implementation HSColorPicker
 {
     NSTrackingArea  * trackingArea;
-    BOOL            mouseOver;
 } // End of HSColorPicker
 
 //Add this to Your imageView subclass

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27F2034A2286DABD00028863 /* wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 27F203492286DABD00028863 /* wheel.png */; };
+		27F2034E2286EAB200028863 /* HSCustomColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F2034C2286EAB200028863 /* HSCustomColorPicker.h */; };
+		27F2034F2286EAB200028863 /* HSCustomColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2034D2286EAB200028863 /* HSCustomColorPicker.m */; };
 		7293CF4020FF66220058D83E /* HSColorPickerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7293CF3C20FF66220058D83E /* HSColorPickerBar.m */; };
 		7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7293CF3D20FF66220058D83E /* HSColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7293CF4220FF66220058D83E /* HSColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7293CF3E20FF66220058D83E /* HSColorPicker.m */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27F203492286DABD00028863 /* wheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel.png; sourceTree = "<group>"; };
+		27F2034C2286EAB200028863 /* HSCustomColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSCustomColorPicker.h; sourceTree = "<group>"; };
+		27F2034D2286EAB200028863 /* HSCustomColorPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSCustomColorPicker.m; sourceTree = "<group>"; };
 		7293CF3020FF66140058D83E /* HSColorPickerBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSColorPickerBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7293CF3420FF66140058D83E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7293CF3C20FF66220058D83E /* HSColorPickerBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSColorPickerBar.m; sourceTree = "<group>"; };
@@ -52,11 +58,14 @@
 		7293CF3220FF66140058D83E /* HSColorPickerBar */ = {
 			isa = PBXGroup;
 			children = (
+				27F203492286DABD00028863 /* wheel.png */,
 				7293CF4320FF667C0058D83E /* HSColorPickerBar.h */,
 				7293CF3C20FF66220058D83E /* HSColorPickerBar.m */,
 				7293CF3D20FF66220058D83E /* HSColorPicker.h */,
 				7293CF3E20FF66220058D83E /* HSColorPicker.m */,
 				7293CF3420FF66140058D83E /* Info.plist */,
+				27F2034C2286EAB200028863 /* HSCustomColorPicker.h */,
+				27F2034D2286EAB200028863 /* HSCustomColorPicker.m */,
 			);
 			path = HSColorPickerBar;
 			sourceTree = "<group>";
@@ -70,6 +79,7 @@
 			files = (
 				7293CF4420FF667C0058D83E /* HSColorPickerBar.h in Headers */,
 				7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */,
+				27F2034E2286EAB200028863 /* HSCustomColorPicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F2034A2286DABD00028863 /* wheel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +153,7 @@
 			files = (
 				7293CF4220FF66220058D83E /* HSColorPicker.m in Sources */,
 				7293CF4020FF66220058D83E /* HSColorPickerBar.m in Sources */,
+				27F2034F2286EAB200028863 /* HSCustomColorPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
