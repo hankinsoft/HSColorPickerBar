@@ -18,8 +18,9 @@
   
   @try
   {
-    // This call works only for component-based colors, but color panel allows us to pick non-sRGB based ones
-    [self getHue:&h saturation:&s brightness:&b alpha:&a];
+    NSColor * tempColor = [self colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
+    [tempColor getHue:&h saturation:&s brightness:&b alpha:&a];
+
     
     outColor = [NSColor colorWithHue:h
                           saturation:s
@@ -40,7 +41,8 @@
   NSColor *outColor = nil;
   @try
   {
-    [self getHue:&h saturation:&s brightness:&b alpha:&a];
+    NSColor * tempColor = [self colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
+    [tempColor getHue:&h saturation:&s brightness:&b alpha:&a];
     
     outColor = [NSColor colorWithHue:h
                           saturation:s
