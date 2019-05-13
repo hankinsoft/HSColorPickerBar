@@ -106,6 +106,10 @@
 {
     if ([theEvent clickCount] == 1)
     {
+        // Close the color picker panel, so we don't confuse the user.
+        NSColorPanel *colorPanel = [NSColorPanel sharedColorPanel];
+        [colorPanel close];
+
         if(self.delegate && [self.delegate respondsToSelector: @selector(colorPickerWasClicked:)])
         {
             [self.delegate colorPickerWasClicked: self];
