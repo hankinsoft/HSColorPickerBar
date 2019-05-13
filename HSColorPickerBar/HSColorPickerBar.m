@@ -136,14 +136,7 @@
             return colorPicker.backgroundColor;
         }
     }
-
-    // If we get here and we allow custom color + have one picked, then
-    // thats what we will return.
-    if(self.allowsCustomColorSelection && customColorPicker.isSelected)
-    {
-        return customColorPicker.backgroundColor;
-    }
-
+    
     return nil;
 } // End of selectedColor
 
