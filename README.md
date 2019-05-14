@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hankinsoft/HSColorPicker.svg?branch=master)](https://travis-ci.org/hankinsoft/HSColorPicker)
+
 # HSColorPickerBar
 Color picker used by Hankinsoft Development in SQLPro products.
 
