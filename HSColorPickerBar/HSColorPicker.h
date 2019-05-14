@@ -10,13 +10,6 @@
 
 @class HSColorPicker;
 
-@interface NSColor (DarkLight)
-
-- (NSColor *) lighterColor;
-- (NSColor *) darkerColor;
-@end
-
-
 @protocol HSColorPickerDelegate <NSObject>
 
 - (void) colorPickerWasClicked: (HSColorPicker*) colorPicker;

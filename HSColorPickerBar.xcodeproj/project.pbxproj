@@ -16,6 +16,8 @@
 		27F203612289B56500028863 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F203602289B56500028863 /* main.m */; };
 		27F203692289B5D900028863 /* HSColorPickerBar.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7293CF3020FF66140058D83E /* HSColorPickerBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27F2036B2289B5E400028863 /* HSColorPickerBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7293CF3020FF66140058D83E /* HSColorPickerBar.framework */; };
+		727B4518228B20C800CB3C60 /* HSColorPickerColorHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 727B4516228B20C800CB3C60 /* HSColorPickerColorHelper.h */; };
+		727B4519228B20C800CB3C60 /* HSColorPickerColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B4517228B20C800CB3C60 /* HSColorPickerColorHelper.m */; };
 		7293CF4020FF66220058D83E /* HSColorPickerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7293CF3C20FF66220058D83E /* HSColorPickerBar.m */; };
 		7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7293CF3D20FF66220058D83E /* HSColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7293CF4220FF66220058D83E /* HSColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7293CF3E20FF66220058D83E /* HSColorPicker.m */; };
@@ -57,6 +59,8 @@
 		27F2035F2289B56500028863 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F203602289B56500028863 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		27F203622289B56500028863 /* TestColorPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestColorPicker.entitlements; sourceTree = "<group>"; };
+		727B4516228B20C800CB3C60 /* HSColorPickerColorHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSColorPickerColorHelper.h; sourceTree = "<group>"; };
+		727B4517228B20C800CB3C60 /* HSColorPickerColorHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSColorPickerColorHelper.m; sourceTree = "<group>"; };
 		7293CF3020FF66140058D83E /* HSColorPickerBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HSColorPickerBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7293CF3420FF66140058D83E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7293CF3C20FF66220058D83E /* HSColorPickerBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSColorPickerBar.m; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 				7293CF3420FF66140058D83E /* Info.plist */,
 				27F2034C2286EAB200028863 /* HSCustomColorPicker.h */,
 				27F2034D2286EAB200028863 /* HSCustomColorPicker.m */,
+				727B4516228B20C800CB3C60 /* HSColorPickerColorHelper.h */,
+				727B4517228B20C800CB3C60 /* HSColorPickerColorHelper.m */,
 			);
 			path = HSColorPickerBar;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 				7293CF4420FF667C0058D83E /* HSColorPickerBar.h in Headers */,
 				7293CF4120FF66220058D83E /* HSColorPicker.h in Headers */,
 				27F2034E2286EAB200028863 /* HSCustomColorPicker.h in Headers */,
+				727B4518228B20C800CB3C60 /* HSColorPickerColorHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				727B4519228B20C800CB3C60 /* HSColorPickerColorHelper.m in Sources */,
 				7293CF4220FF66220058D83E /* HSColorPicker.m in Sources */,
 				7293CF4020FF66220058D83E /* HSColorPickerBar.m in Sources */,
 				27F2034F2286EAB200028863 /* HSCustomColorPicker.m in Sources */,

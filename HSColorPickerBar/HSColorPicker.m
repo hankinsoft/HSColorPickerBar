@@ -7,58 +7,7 @@
 //
 
 #import "HSColorPicker.h"
-
-
-@implementation NSColor (DarkLight)
-
-- (NSColor *) lighterColor
-{
-  CGFloat h, s, b, a;
-  NSColor *outColor = nil;
-  
-  @try
-  {
-    NSColor * tempColor = [self colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
-    [tempColor getHue:&h saturation:&s brightness:&b alpha:&a];
-
-    
-    outColor = [NSColor colorWithHue:h
-                          saturation:s
-                          brightness:MIN(b * 1.3, 1.0)
-                               alpha:a];
-  }
-  @catch(NSException *colorException)
-  {
-    outColor = [NSColor lightGrayColor];
-  }
-  return outColor;
-}
-
-- (NSColor *) darkerColor
-{
-  CGFloat h, s, b, a;
-  
-  NSColor *outColor = nil;
-  @try
-  {
-    NSColor * tempColor = [self colorUsingColorSpace: [NSColorSpace sRGBColorSpace]];
-    [tempColor getHue:&h saturation:&s brightness:&b alpha:&a];
-    
-    outColor = [NSColor colorWithHue:h
-                          saturation:s
-                          brightness:b * 0.75
-                               alpha:a];
-    
-  }
-  @catch (NSException *exception)
-  {
-    outColor = [NSColor darkGrayColor];
-  }
-  
-  return outColor;
-}
-
-@end
+#import "HSColorPickerColorHelper.h"
 
 @implementation HSColorPicker
 {
@@ -160,7 +109,17 @@
     } // End of mouseOver
 
     // Set the color in the current graphics context for future draw operations
-    [[self.backgroundColor darkerColor] setStroke];
+    NSColor * borderColor = self.backgroundColor;
+    if([HSColorPickerColorHelper isDark: borderColor])
+    {
+        borderColor = [HSColorPickerColorHelper lighterColor: borderColor];
+    }
+    else
+    {
+        borderColor = [HSColorPickerColorHelper darkerColor: borderColor];
+    }
+
+    [borderColor setStroke];
     [self.backgroundColor setFill];
 
     // Create our circle path
