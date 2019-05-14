@@ -43,13 +43,62 @@
     [self initializeColorBar];
 } // End of awakeFromNib
 
+// Align pickers left (pass YES) of right (pass NO).
+-(void)setColorPickersAlignmentLeft:(BOOL)alignLeft {
+  // 1) Remove all color pickers from the current View
+  [[self subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+  
+  // 2) Add all color pickers and their constraints, one by one
+  if(alignLeft) {
+    for(HSColorPicker *colorPicker in colorPickers) {
+      [self addSubview: colorPicker];
+      
+      NSInteger index = [colorPickers indexOfObject:colorPicker];
+      
+      CGFloat offset = index * (self.bounds.size.height + self.padding);
+      
+      [colorPicker.heightAnchor constraintEqualToConstant: self.bounds.size.height].active = YES;
+      [colorPicker.widthAnchor constraintEqualToConstant: self.bounds.size.height].active = YES;
+      [colorPicker.centerYAnchor constraintEqualToAnchor: self.centerYAnchor].active = YES;
+      //Working left anchor alignment (default)
+      [colorPicker.leftAnchor constraintEqualToAnchor: self.leftAnchor constant: offset].active = YES;
+    }
+  } else {
+    for (HSColorPicker *colorPicker  in [colorPickers reverseObjectEnumerator]) {
+      
+      [self addSubview: colorPicker];
+      
+      NSInteger index = [colorPickers indexOfObject:colorPicker];
+      
+      CGFloat offset = (colorPickers.count-index-1) * (self.bounds.size.height + self.padding);
+      
+      if(!self.allowsCustomColorSelection) {
+        offset -= (self.bounds.size.height + self.padding);
+      }
+      
+      [colorPicker.heightAnchor constraintEqualToConstant: self.bounds.size.height].active = YES;
+      [colorPicker.widthAnchor constraintEqualToConstant: self.bounds.size.height].active = YES;
+      [colorPicker.centerYAnchor constraintEqualToAnchor: self.centerYAnchor].active = YES;
+      
+      //Working right-anchor alignment
+      [colorPicker.rightAnchor constraintEqualToAnchor: self.rightAnchor constant: -offset].active = YES;
+    }
+  }
+  
+  [self setNeedsLayout: YES];
+  [self setNeedsDisplay: YES];
+  
+  _colorPickersAlignmentLeft = alignLeft;
+}
+
 - (void) initializeColorBar
 {
     if(nil == colorPickers)
     {
         colorPickers = @[].mutableCopy;
     }
-    
+  
+    // Adding all the "colors", from left to right
     [self initializeColorBarWithColor: self.color1];
     [self initializeColorBarWithColor: self.color2];
     [self initializeColorBarWithColor: self.color3];
@@ -65,7 +114,10 @@
   
     // Forcefully calling the property setter to update initial state set in Interface Builder
     [self setAllowsCustomColorSelection:self.allowsCustomColorSelection];
-  
+
+    // Force alignment as per Interface Builder settings
+    [self setColorPickersAlignmentLeft:self.colorPickersAlignmentLeft];
+
   
     [self setNeedsLayout: YES];
     [self setNeedsDisplay: YES];
@@ -82,17 +134,7 @@
     colorPicker.delegate = self;
     colorPicker.backgroundColor = color;
 
-    [self addSubview: colorPicker];
-    
-    CGFloat offset = 0;
-    offset = (colorPickers.count * self.bounds.size.height) + (self.padding * colorPickers.count);
-
     colorPicker.translatesAutoresizingMaskIntoConstraints = false;
-    [colorPicker.heightAnchor constraintEqualToConstant: self.bounds.size.height].active = true;
-    [colorPicker.widthAnchor constraintEqualToConstant: self.bounds.size.height].active = true;
-    [colorPicker.centerYAnchor constraintEqualToAnchor: self.centerYAnchor].active = true;
-    [colorPicker.leftAnchor constraintEqualToAnchor: self.leftAnchor
-                                           constant: offset].active = true;
 
     // Add our color picker
     [colorPickers addObject: colorPicker];
@@ -100,27 +142,11 @@
 
 - (void) initializeCustomColorBar
 {
-  /*if(nil == color)
-  {
-    return;
-  } // End of no image ie not picked in interface*/
-  
   HSCustomColorPicker * colorPicker = [[HSCustomColorPicker alloc] init];
   colorPicker.delegate = self;
   colorPicker.backgroundColor = nil; // By default we start with no selected color
-  
-  [self addSubview: colorPicker];
-  
-  CGFloat offset = 0;
-  offset = (colorPickers.count * self.bounds.size.height) + (self.padding * colorPickers.count);
-  
   colorPicker.translatesAutoresizingMaskIntoConstraints = false;
-  [colorPicker.heightAnchor constraintEqualToConstant: self.bounds.size.height].active = true;
-  [colorPicker.widthAnchor constraintEqualToConstant: self.bounds.size.height].active = true;
-  [colorPicker.centerYAnchor constraintEqualToAnchor: self.centerYAnchor].active = true;
-  [colorPicker.leftAnchor constraintEqualToAnchor: self.leftAnchor
-                                         constant: offset].active = true;
-  
+
   // Add our color picker
   [colorPickers addObject: colorPicker];
   
@@ -252,5 +278,8 @@ isEqualToColor: (NSColor *) color2
     [customColorPicker setHidden:YES];
   }
   _allowsCustomColorSelection = allows;
+  
+  // forcing realignment of the pickers
+  [self setColorPickersAlignmentLeft:_colorPickersAlignmentLeft];
 }
 @end

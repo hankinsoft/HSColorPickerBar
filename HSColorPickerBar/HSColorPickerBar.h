@@ -51,5 +51,6 @@ IB_DESIGNABLE
 @property(nonatomic) IBInspectable BOOL allowsCustomColorSelection;
 
 @property(nonatomic,weak) IBInspectable id<HSColorPickerBarDelegate> delegate;
+@property(nonatomic) IBInspectable BOOL colorPickersAlignmentLeft;
 
 @end
