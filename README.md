@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/hankinsoft/HSColorPickerBar.svg?branch=master)](https://travis-ci.org/hankinsoft/HSColorPickerBar)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 # HSColorPickerBar
 Color picker used by Hankinsoft Development in SQLPro products.
