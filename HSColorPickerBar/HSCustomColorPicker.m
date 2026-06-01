@@ -114,12 +114,9 @@
 
 }
 
-// The shared NSColorPanel retains the target/action that was last installed.
-// If we go away (or move out of the window) without clearing them, the next
-// color change is dispatched to either a dangling pointer or down the
-// responder chain, landing on whichever view now sits there. That has been
-// crashing as `-[SQLProGeneralTableCellView colorPanelColorSelected:]:
-// unrecognized selector` -- Bugsnag 69e1d0f57aaa488f2caf6663.
+// The shared color panel hangs on to whatever target/action we last set on
+// it. If we don't clear them when we go away, the next color change ends up
+// either at a dangling pointer or somewhere down the responder chain.
 - (void) clearColorPanelTargetIfNeeded
 {
   NSColorPanel * panel = [NSColorPanel sharedColorPanel];
