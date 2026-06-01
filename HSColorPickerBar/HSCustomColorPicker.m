@@ -106,12 +106,42 @@
   //NSLog(@"Yuri color: %@", newCustomColor);
   self.backgroundColor = newCustomColor;
   [self setNeedsDisplay:YES];
-  
+
   if(self.delegate && [self.delegate respondsToSelector: @selector(colorPickerWasClicked:)])
   {
     [self.delegate customColorPickerUpdateColor: self];
   } // End of we respond to the selector
 
+}
+
+// The shared NSColorPanel retains the target/action that was last installed.
+// If we go away (or move out of the window) without clearing them, the next
+// color change is dispatched to either a dangling pointer or down the
+// responder chain, landing on whichever view now sits there. That has been
+// crashing as `-[SQLProGeneralTableCellView colorPanelColorSelected:]:
+// unrecognized selector` -- Bugsnag 69e1d0f57aaa488f2caf6663.
+- (void) clearColorPanelTargetIfNeeded
+{
+  NSColorPanel * panel = [NSColorPanel sharedColorPanel];
+  if (panel.target == self)
+  {
+    [panel setTarget: nil];
+    [panel setAction: NULL];
+  }
+}
+
+- (void) viewWillMoveToWindow: (NSWindow *) newWindow
+{
+  if (nil == newWindow)
+  {
+    [self clearColorPanelTargetIfNeeded];
+  }
+  [super viewWillMoveToWindow: newWindow];
+}
+
+- (void) dealloc
+{
+  [self clearColorPanelTargetIfNeeded];
 }
 
 @end
