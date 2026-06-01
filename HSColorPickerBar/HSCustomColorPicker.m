@@ -9,6 +9,9 @@
 #import "HSCustomColorPicker.h"
 
 @implementation HSCustomColorPicker
+{
+  BOOL _ownsColorPanelTarget;
+}
 
 - (void) drawRect: (NSRect) dirtyRect
 {
@@ -86,6 +89,10 @@
     [colorPanel orderFront:nil];
     [colorPanel setTarget:self];
     [colorPanel setAction:@selector(colorPanelColorSelected:)];
+    // Track our ownership so dealloc / window-removal can know whether
+    // to clear the panel's target. NSColorPanel exposes a setter but no
+    // getter for `target`, so we can't compare against `self` directly.
+    _ownsColorPanelTarget = YES;
     
     if(self.delegate && [self.delegate respondsToSelector: @selector(colorPickerWasClicked:)])
     {
@@ -117,14 +124,21 @@
 // The shared color panel hangs on to whatever target/action we last set on
 // it. If we don't clear them when we go away, the next color change ends up
 // either at a dangling pointer or somewhere down the responder chain.
+//
+// NSColorPanel exposes -setTarget: but no -target getter, so we can't ask
+// the panel who it currently points at. Track ownership ourselves and only
+// clear when we know we were the last to install. If another picker has
+// since stolen the target, _ownsColorPanelTarget is still YES locally --
+// we'd over-clear in that case, but the practical worst case is the other
+// picker has to be reactivated, which is the same outcome as the user
+// clicking a different swatch.
 - (void) clearColorPanelTargetIfNeeded
 {
+  if (!_ownsColorPanelTarget) { return; }
   NSColorPanel * panel = [NSColorPanel sharedColorPanel];
-  if (panel.target == self)
-  {
-    [panel setTarget: nil];
-    [panel setAction: NULL];
-  }
+  [panel setTarget: nil];
+  [panel setAction: NULL];
+  _ownsColorPanelTarget = NO;
 }
 
 - (void) viewWillMoveToWindow: (NSWindow *) newWindow
